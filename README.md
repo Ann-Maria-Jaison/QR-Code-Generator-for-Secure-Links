@@ -26,3 +26,24 @@ Follow these steps to set up and run the project locally:
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/your-username/secure-link-qr-code-generator.git
+2. **Navigate to the project directory:**:
+   ```bash
+   cd secure-link-qr-code-generator
+3. **Install the required libraries:**:
+   ```bash
+   pip install flask qrcode[pil]
+4. **Run the Flask app:**:
+   ```bash
+   python app.py
+5. **Open your browser** and navigate to `http://127.0.0.1:5000/` to use the app.
+
+## How It Works
+
+1. The user inputs a secure URL in the provided form.
+2. The backend (Flask) processes the input and generates a QR code for the URL.
+3. The generated QR code is displayed on the webpage, ready to be scanned.
+
+
+
+
+
