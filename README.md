@@ -8,7 +8,7 @@ This application is designed with cybersecurity in mind. By encoding a secure UR
 
 ## Features
 
-- Input a secure URL and generate a corresponding QR code.
+- Input a URL and checking is that secure or not using gogle secure link API
 - User-friendly interface with form submission.
 - Backend implemented using Flask to handle QR code generation.
 - QR code dynamically generated and displayed on the webpage.
