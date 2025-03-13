@@ -46,8 +46,8 @@ Follow these steps to set up and run the project locally:
 
 ## Done by:
 
-    Ann Maria Jaison 
-    St. Joseph college of engineering and technology, palai
+    **Ann Maria Jaison** 
+    **St. Joseph college of engineering and technology, palai**
 
 
 
