@@ -44,10 +44,7 @@ Follow these steps to set up and run the project locally:
 3. The generated QR code is displayed on the webpage, ready to be scanned.
 
 
-## Done by:
-
-    **Ann Maria Jaison** 
-    **St. Joseph college of engineering and technology, palai**
+## Done by: Ann Maria Jaison 
 
 
 
