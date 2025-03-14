@@ -5,8 +5,10 @@ import requests
 import validators
 import os
 
-# Load API Key from environment variable (secure way)
-API_KEY = os.getenv("GOOGLE_API_KEY")  # Your actual API key
+# Load environment variables from .env file
+load_dotenv()
+
+API_KEY = os.getenv("GOOGLE_API_KEY")
 
 if not API_KEY:
     raise ValueError("Google Safe Browsing API key is missing! Set it as an environment variable.")
