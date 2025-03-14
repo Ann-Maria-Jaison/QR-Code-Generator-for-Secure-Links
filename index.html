@@ -3,44 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator</title>
+    <title>Cyber QR Code Generator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
+            background-color: black;
+            color: #00ff00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .glass-container {
+            background: rgba(0, 255, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px #00ff00;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+        h1 {
+            text-shadow: 0 0 10px #233d23;
         }
         input {
             padding: 10px;
             width: 80%;
             margin-bottom: 20px;
+            background-color: black;
+            color: #2b4d2b;
+            border: 1px solid #253025;
+            outline: none;
+            text-align: center;
+        }
+        input:focus {
+            box-shadow: 0 0 10px #00ff00;
         }
         button {
             padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
+            background-color: #00ff00;
+            color: black;
             border: none;
             cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 0 10px #00ff00;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: black;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 20px #00ff00;
         }
         #qrcode {
             margin-top: 20px;
         }
+        img {
+            border: 2px solid #3d423d;
+            box-shadow: 0 0 10px #338033;
+        }
+        /* ✅ Added margin & padding for better spacing */
+        .message-container {
+            margin-top: 20px;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1.5; /* ✅ Increased line height */
+        }
+        .error-message {
+            color: red;
+        }
+        .success-message {
+            color: rgb(255, 255, 255);
+        }
     </style>
 </head>
 <body>
-    <h1>Secure Link QR Code Generator</h1>
-    <form action="/generate_qrcode" method="POST">
-        <input type="url" name="secure_link" placeholder="Enter a secure link" required>
-        <br>
-        <button type="submit">Generate QR Code</button>
-    </form>
-    <div id="qrcode">
-        {% if qrcode_url %}
-            <img src="{{ qrcode_url }}" alt="QR Code">
-        {% endif %}
+    <div class="glass-container">
+        <h1>Secure QR Code Generator</h1>
+        
+        <form id="qrForm" method="POST">
+            <input type="url" id="secure_link" name="secure_link" placeholder="Enter a secure link" required>
+            <br>
+            <button type="submit">Generate QR Code</button>
+        </form>
+
+        <!-- ✅ Added spacing-friendly message container -->
+        <div id="message-container" class="message-container"></div>
+        <div id="qrcode">
+            <img id="qrImage" style="display: none;" alt="QR Code">
+        </div>
     </div>
 </body>
+
+<script>
+document.getElementById("qrForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    let secureLink = document.getElementById("secure_link").value;
+    fetch("/generate_qrcode", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secure_link=${encodeURIComponent(secureLink)}`
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(data => {
+                throw new Error(data.error);
+            });
+        }
+        return response.blob();
+    })
+    .then(blob => {
+        let messageContainer = document.getElementById("message-container");
+        let qrImage = document.getElementById("qrImage");
+
+        // ✅ Display success message with spacing
+        messageContainer.innerHTML = `<span class="success-message">✅ URL is safe!<br>Your QR code is ready:</span>`;
+
+        // ✅ Display QR Code
+        qrImage.src = URL.createObjectURL(blob);
+        qrImage.style.display = "block";
+    })
+    .catch(error => {
+        let messageContainer = document.getElementById("message-container");
+        let qrImage = document.getElementById("qrImage");
+
+        // ❌ Display error message with spacing
+        messageContainer.innerHTML = `<span class="error-message">🚨 ${error.message}</span>`;
+        qrImage.style.display = "none";  // Hide QR code if the link is unsafe
+    });
+});
+</script>
 </html>
