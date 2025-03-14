@@ -1,51 +1,72 @@
-# Secure Link QR Code Generator
+# Secure QR Code Generator
 
-This project is a simple web application built using Flask and Python that generates QR codes for secure URLs. It showcases how QR codes can be used to securely share links, reducing the risks associated with URL tampering or phishing attacks.
-
-## Cybersecurity Relevance
-
-This application is designed with cybersecurity in mind. By encoding a secure URL into a QR code, users can share links without directly exposing them, which helps to prevent malicious tampering or phishing attempts.
+This is a Flask-based web application that allows users to generate QR codes for secure links. It checks the safety of URLs using Google's Safe Browsing API before generating a QR code.
 
 ## Features
+- Validate URL format before processing.
+- Check URL safety using Google Safe Browsing API.
+- Generate QR codes only for safe URLs.
+- Return the QR code as a downloadable image.
 
-- Input a URL and checking is that secure or not using gogle secure link API
-- User-friendly interface with form submission.
-- Backend implemented using Flask to handle QR code generation.
-- QR code dynamically generated and displayed on the webpage.
-
-## Technologies Used
-
-- **Flask**: A lightweight Python web framework for the backend.
-- **qrcode**: Python library for generating QR codes.
-- **HTML/CSS**: For building the frontend interface.
+## Prerequisites
+Ensure you have the following installed:
+- Python 3.x
+- Flask
+- Requests
+- QRCode
+- Validators
 
 ## Installation
 
-Follow these steps to set up and run the project locally:
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo-name.git
+   cd your-repo-name
+   ```
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/secure-link-qr-code-generator.git
-2. **Navigate to the project directory:**:
-   ```bash
-   cd secure-link-qr-code-generator
-3. **Install the required libraries:**:
-   ```bash
-   pip install flask qrcode[pil]
-4. **Run the Flask app:**:
-   ```bash
+2. Create and activate a virtual environment:
+   ```sh
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+3. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+4. Set up environment variables:
+   - Create a `.env` file or set the API key manually:
+     ```sh
+     export API_KEY="your-google-safe-browsing-api-key"
+     ```
+
+## Usage
+
+1. Run the application:
+   ```sh
    python app.py
-5. **Open your browser** and navigate to `http://127.0.0.1:5000/` to use the app.
+   ```
 
-## How It Works
+2. Open the application in your browser:
+   ```sh
+   http://127.0.0.1:5000
+   ```
 
-1. The user inputs a secure URL in the provided form.
-2. The backend (Flask) processes the input and generates a QR code for the URL.
-3. The generated QR code is displayed on the webpage, ready to be scanned.
+3. Enter a URL, and if it's safe, a QR code will be generated.
 
+## API Endpoints
+- `GET /` - Renders the homepage.
+- `POST /generate_qrcode` - Accepts a URL, checks its safety, and returns a QR code if safe.
 
-## Done by: Ann Maria Jaison 
+## Security Considerations
+- Uses Google Safe Browsing API to filter malicious URLs.
+- Validates URLs before processing.
+- Does not store any user data.
 
+## Author
+Ann Maria Jaison
 
-
+## License
+This project is licensed under the MIT License.
 
