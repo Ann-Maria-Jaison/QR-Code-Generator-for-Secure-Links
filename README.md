@@ -1,6 +1,6 @@
 # Secure QR Code Generator
 
-This is a Flask-based web application that allows users to generate QR codes for secure links. It checks the safety of URLs using Google's Safe Browsing API before generating a QR code. 
+This is a Flask-based web application that allows users to generate QR codes for secure links. It checks the safety of URLs using Google's Safe Browsing API before generating a QR code.
 
 ## Features
 - Validate URL format before processing.
